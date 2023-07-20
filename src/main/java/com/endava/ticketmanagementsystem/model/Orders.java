@@ -31,7 +31,7 @@ public class Orders {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users users;
+    private User user;
 
     @Column(name = "total_price")
     private Integer totalPrice;
