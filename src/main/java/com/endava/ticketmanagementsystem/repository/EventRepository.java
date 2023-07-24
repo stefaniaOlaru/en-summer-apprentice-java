@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event,Integer> {
-    //i want to find all events by venue id and event type name
     List<Event> findEventsByVenueIdAndEventTypeName(Integer venueId, String eventTypeName);
     List<Event> findAll();
 }
