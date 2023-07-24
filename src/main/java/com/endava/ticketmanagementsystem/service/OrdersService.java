@@ -1,6 +1,8 @@
 package com.endava.ticketmanagementsystem.service;
 
+import com.endava.ticketmanagementsystem.dto.OrderRequestDTO;
 import com.endava.ticketmanagementsystem.model.Orders;
+import com.endava.ticketmanagementsystem.model.TicketCategory;
 import com.endava.ticketmanagementsystem.model.User;
 import com.endava.ticketmanagementsystem.repository.OrdersRepository;
 import com.endava.ticketmanagementsystem.repository.TicketCategoryRepository;
@@ -27,12 +29,14 @@ public class OrdersService implements IOrdersService{
     }
 
     @Override
-    public Orders saveOrder(Orders order) {
-        User user = userRepository.findUserById(order.getUser().getId());
-        Integer totalPrice = ticketCategoryRepository.findPriceById(order.getTicketCategory().getId()) *
+    public Orders saveOrder(OrderRequestDTO order) {
+        Integer userId = 6;
+        User user = userRepository.findUserById(userId);
+        TicketCategory ticketCategory = ticketCategoryRepository.findTicketCategoryById(order.getTicketCategoryId());
+        Integer totalPrice = ticketCategory.getPrice() *
                 order.getNumberOfTickets();
-        Orders tempOrder = new Orders(order.getId(), new Date(), order.getNumberOfTickets(),
-                order.getUser(), totalPrice,order.getTicketCategory());
+        Orders tempOrder = new Orders( new Date(), order.getNumberOfTickets(),
+                user, totalPrice,ticketCategory);
         ordersRepository.save(tempOrder);
         return tempOrder;
     }

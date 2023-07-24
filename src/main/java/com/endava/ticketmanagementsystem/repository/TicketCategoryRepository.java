@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TicketCategoryRepository extends JpaRepository<TicketCategory, Integer> {
-    Integer findPriceById(Integer ticketCategoryId);
+   // Integer findPriceById(Integer ticketCategoryId);
     List<TicketCategory> findTicketCategoriesByEventId(Integer eventId);
+    TicketCategory findTicketCategoryById(Integer ticketCategoryId);
 }

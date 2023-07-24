@@ -40,4 +40,11 @@ public class Orders {
     @JoinColumn(name = "ticket_category_id")
     private TicketCategory ticketCategory;
 
+    public Orders(Date orderedAt, Integer numberOfTickets, User user, Integer totalPrice, TicketCategory ticketCategory) {
+        this.orderedAt = orderedAt;
+        this.numberOfTickets = numberOfTickets;
+        this.user = user;
+        this.totalPrice = totalPrice;
+        this.ticketCategory = ticketCategory;
+    }
 }
