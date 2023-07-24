@@ -1,6 +1,7 @@
 package com.endava.ticketmanagementsystem.controller;
 
 import com.endava.ticketmanagementsystem.dto.EventDTO;
+import com.endava.ticketmanagementsystem.dto.TicketCategoryDTO;
 import com.endava.ticketmanagementsystem.model.Event;
 import com.endava.ticketmanagementsystem.model.TicketCategory;
 import com.endava.ticketmanagementsystem.repository.TicketCategoryRepository;
@@ -31,24 +32,14 @@ public class EventController {
         List<Event> events = eventService.getEventsByVenueAndType(venueId, eventType);
         List<EventDTO> eventDTO = new ArrayList<>();
         for(int i =0 ; i < events.size(); i++){
-            eventDTO.add(transformEvent(events.get(i)));
+            eventDTO.add(eventService.transformEvent(events.get(i)));
         }
         return eventDTO;
     }
 
-    public EventDTO transformEvent(Event event){
-        EventDTO eventDTO = new EventDTO();
-        eventDTO.setId(event.getId());
-        eventDTO.setVenue(event.getVenue());
-        eventDTO.setType(event.getEventType().getName());
-        eventDTO.setDescription(event.getDescription());
-        eventDTO.setName(event.getName());
-        eventDTO.setStartDate(event.getStartDate());
-        eventDTO.setEndDate(event.getEndDate());
-        List <TicketCategory> ticketCategories = ticketCategoryRepository.findTicketCategoriesByEventId(event.getId());
-        eventDTO.setTicketCategories(ticketCategories);
-        return eventDTO;
-    }
+
+
+
 
 
 }

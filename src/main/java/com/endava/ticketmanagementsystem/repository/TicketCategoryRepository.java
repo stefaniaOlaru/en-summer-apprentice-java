@@ -1,5 +1,6 @@
 package com.endava.ticketmanagementsystem.repository;
 
+import com.endava.ticketmanagementsystem.dto.TicketCategoryDTO;
 import com.endava.ticketmanagementsystem.model.TicketCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 

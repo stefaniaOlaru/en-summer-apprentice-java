@@ -22,5 +22,5 @@ public class EventDTO {
     private String name;
     private Date startDate;
     private Date endDate;
-    private List<TicketCategory> ticketCategories;
+    private List<TicketCategoryDTO> ticketCategories;
 }

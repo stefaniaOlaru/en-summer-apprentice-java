@@ -1,5 +1,6 @@
 package com.endava.ticketmanagementsystem.controller;
 
+import com.endava.ticketmanagementsystem.dto.OrderDTO;
 import com.endava.ticketmanagementsystem.dto.OrderRequestDTO;
 import com.endava.ticketmanagementsystem.dto.OrderResponseDTO;
 import com.endava.ticketmanagementsystem.model.Orders;
@@ -19,27 +20,18 @@ public class OrdersController {
     private OrdersService ordersService;
 
     @GetMapping("/api/getorders")
-    public List<Orders> getAllOrders( ) {
+    public List<OrderDTO> getAllOrders( ) {
         User user = new User();
         user.setId(3);
-        return ordersService.getOrdersByUser(user);
+        List < OrderDTO> orders = ordersService.transformOrders(ordersService.getOrdersByUser(user));
+        return orders;
     }
 
     @PostMapping("/api/saveorder")
     public OrderResponseDTO saveOrder(@RequestBody OrderRequestDTO orderRequest){
 
         Orders order = ordersService.saveOrder(orderRequest);
-        return transformOrderResponse(orderRequest.getEventId(),order);
+        return ordersService.transformOrderResponse(orderRequest.getEventId(),order);
     }
 
-
-    public OrderResponseDTO transformOrderResponse(Integer eventId ,Orders order){
-        OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
-        orderResponseDTO.setEventId(eventId);
-        orderResponseDTO.setTimestamp(order.getOrderedAt());
-        orderResponseDTO.setTicketCategoryId(order.getTicketCategory().getId());
-        orderResponseDTO.setNumberOfTickets(order.getNumberOfTickets());
-        orderResponseDTO.setTotalPrice(order.getTotalPrice());
-        return orderResponseDTO;
-    }
 }
